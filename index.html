@@ -1,154 +1,602 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <script>
-if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
-  document.documentElement.classList.add('js-reveal');
-}
+(function () {
+  var d = document.documentElement;
+  d.classList.add('js');
+  // as fontes carregam sem bloquear; esta promessa resolve quando chegam (ou em 1,4 s)
+  window.fontCSS = new Promise(function (r) { window.__fontsDone = r; setTimeout(r, 1400); });
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+    d.classList.add('motion');
+    // garantia: o conteúdo aparece mesmo que algum ficheiro demore
+    setTimeout(function () { d.classList.add('ready'); }, 2200);
+  }
+})();
 </script>
-<title>GTEXCREATIVE - Sites e Apps</title>
-<meta name="description" content="GTEXCREATIVE, websites personalizados e desenvolvimento web. Transformamos ideias em experiências digitais.">
+<title>GTEXCREATIVE, estúdio independente de sites e apps</title>
+<meta name="description" content="GTEXCREATIVE desenha e desenvolve sites que transformam visitas em clientes. Sites institucionais, landing pages e design responsivo, do briefing ao ar.">
+<meta name="theme-color" content="#0C0C0B">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="any">
+<meta property="og:type" content="website">
+<meta property="og:title" content="GTEXCREATIVE, de visita a cliente">
+<meta property="og:description" content="Sites e experiências digitais desenhados para marcas que não podem passar despercebidas.">
+<meta property="og:image" content="https://gtexcreative.vercel.app/images/og.jpg">
+<meta property="og:url" content="https://gtexcreative.vercel.app/">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" media="print" onload="this.media='all';window.__fontsDone&&window.__fontsDone()">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"></noscript>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="header" id="header">
-  <div class="container header__inner">
-    <a href="#top" class="logo">GTEXCREATIVE<span class="logo__dot">.</span></a>
+<a class="skip" href="#trabalhos">Pular para os trabalhos</a>
+<div class="progress" aria-hidden="true"><i id="progress"></i></div>
 
-    <nav class="nav" id="nav">
-      <a href="#projetos" class="nav__link">Projetos</a>
-      <a href="#sobre" class="nav__link">Sobre</a>
-      <a href="#contato" class="nav__link">Contato</a>
-      <a href="#contato" class="nav__link nav__link--cta">Fale comigo</a>
-    </nav>
-
-    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
+<header class="nav" id="nav">
+  <a href="#top" class="nav__logo" aria-label="GTEXCREATIVE, voltar ao início">GTEX<span>CREATIVE</span><i>.</i></a>
+  <nav class="nav__links" aria-label="Principal">
+    <a href="#trabalhos" class="nav__link" data-s="trabalhos"><span data-t="Trabalhos">Trabalhos</span></a>
+    <a href="#sobre" class="nav__link" data-s="sobre"><span data-t="Estúdio">Estúdio</span></a>
+    <a href="#processo" class="nav__link" data-s="processo"><span data-t="Processo">Processo</span></a>
+    <a href="#contato" class="nav__link" data-s="contato"><span data-t="Contato">Contato</span></a>
+  </nav>
+  <a href="#contato" class="btn btn--sm nav__cta" data-magnetic><span class="btn__txt">Iniciar projeto</span> <span class="btn__arr" aria-hidden="true"><span>→</span></span></a>
+  <button class="nav__burger" id="burger" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
 </header>
 
-<main>
+<div class="menu" id="menu" aria-hidden="true">
+  <nav class="menu__links" aria-label="Menu">
+    <a href="#trabalhos"><span class="menu__n">GTEX/01</span>Trabalhos</a>
+    <a href="#sobre"><span class="menu__n">GTEX/02</span>Estúdio</a>
+    <a href="#processo"><span class="menu__n">GTEX/04</span>Processo</a>
+    <a href="#contato"><span class="menu__n">GTEX/06</span>Contato</a>
+  </nav>
+  <div class="menu__foot" id="menuFoot">
+    <a href="mailto:gtexcreative@gmail.com">gtexcreative@gmail.com</a>
+    <a href="https://instagram.com/gtexcreative" target="_blank" rel="noopener">Instagram @gtexcreative</a>
+    <a class="btn" href="https://wa.me/5511947822999?text=Ol%C3%A1%2C%20vi%20o%20seu%20portf%C3%B3lio%20e%20quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener">Iniciar projeto <span class="btn__arr" aria-hidden="true"><span>→</span></span></a>
+  </div>
+</div>
 
-  <section class="hero" id="top">
-    <div class="container hero__inner">
-      <p class="hero__eyebrow">GTEXCREATIVE · Sites e Apps</p>
-      <h1 class="hero__title">Sites que transformam visitas em clientes.</h1>
-      <p class="hero__subtitle">
-        Crio sites modernos, rápidos e responsivos para negócios que querem
-        se destacar online, do briefing ao ar, sem enrolação.
-      </p>
-      <div class="hero__actions">
-        <a href="#projetos" class="btn btn--primary">Ver meus projetos</a>
-        <a href="#contato" class="btn btn--ghost">Solicitar orçamento</a>
+<nav class="rail" id="rail" aria-label="Secções da página">
+  <div class="rail__ticks">
+    <a href="#trabalhos" aria-label="GTEX/01 Trabalhos"><i></i></a>
+    <a href="#sobre" aria-label="GTEX/02 Estúdio"><i></i></a>
+    <a href="#servicos" aria-label="GTEX/03 Serviços"><i></i></a>
+    <a href="#processo" aria-label="GTEX/04 Processo"><i></i></a>
+    <a href="#principios" aria-label="GTEX/05 Princípios"><i></i></a>
+    <a href="#contato" aria-label="GTEX/06 Contato"><i></i></a>
+  </div>
+  <p class="rail__label meta" id="railL" aria-hidden="true"><b id="railN">GTEX/01</b><span id="railT">Trabalhos</span><span id="railC"></span></p>
+</nav>
+
+<main id="main">
+
+  <!-- GTEX/00 · ABERTURA -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="wrap hero__in">
+      <div class="hero__top meta">
+        <p class="bar__id"><i class="sq" aria-hidden="true"></i><span><span class="gx">GTEX/</span>00</span></p>
+        <p>Estúdio independente de sites e apps</p>
+        <p>São Paulo · Lisboa</p>
+        <p class="hero__clock" id="clock" aria-hidden="true"><span>SP <b data-tz="America/Sao_Paulo">--:--</b></span><span>LIS <b data-tz="Europe/Lisbon">--:--</b></span></p>
       </div>
-    </div>
-  </section>
 
-  <section class="portfolio" id="projetos">
-    <div class="container">
-      <p class="section__eyebrow">Portfólio</p>
-      <h2 class="section__title">Projetos recentes</h2>
-
-      <div class="portfolio__grid">
-
-        <a class="card" href="https://pet-shop-63kg.vercel.app/" target="_blank" rel="noopener">
-          <div class="card__image"><img src="images/petshop.jpg" alt="Site da Fátima Marques, banho e tosa" loading="lazy"></div>
-          <span class="card__caption">Fátima Marques <span class="card__arrow" aria-hidden="true">→</span></span>
-        </a>
-
-        <a class="card" href="https://exemplo-1-three.vercel.app/" target="_blank" rel="noopener">
-          <div class="card__image"><img src="images/zanetti.jpg" alt="Site da Oficina Zanetti" loading="lazy"></div>
-          <span class="card__caption">Oficina Zanetti <span class="card__arrow" aria-hidden="true">→</span></span>
-        </a>
-
-        <a class="card" href="https://vivi-chiapetta.vercel.app/" target="_blank" rel="noopener">
-          <div class="card__image"><img src="images/vivi.jpg" alt="Site do Espaço Vivi Chiapetta" loading="lazy"></div>
-          <span class="card__caption">Espaço Vivi Chiapetta <span class="card__arrow" aria-hidden="true">→</span></span>
-        </a>
-
-        <a class="card" href="https://terra-quintal.vercel.app/" target="_blank" rel="noopener">
-          <div class="card__image"><img src="images/terra.jpg" alt="Site do Terra Quintal" loading="lazy"></div>
-          <span class="card__caption">Terra Quintal <span class="card__arrow" aria-hidden="true">→</span></span>
-        </a>
-
-        <a class="card" href="https://restaurante-ogarett-rabe.vercel.app/" target="_blank" rel="noopener">
-          <div class="card__image"><img src="images/ogarett.jpg" alt="Site do Restaurante Ogarett" loading="lazy"></div>
-          <span class="card__caption">Restaurante Ogarett <span class="card__arrow" aria-hidden="true">→</span></span>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <section class="about" id="sobre">
-    <div class="container about__inner">
-      <div class="about__photo" aria-hidden="true">
-        <div class="about__ring">
-          <span class="about__monogram">G</span>
+      <div class="hero__main">
+        <h1 class="hero__title display" id="hero-title" aria-label="De visita a cliente.">
+          <span class="line" aria-hidden="true"><span>De visita</span></span>
+          <span class="line" aria-hidden="true"><span>a cliente<i class="dot">.</i></span></span>
+        </h1>
+        <div class="hero__side">
+          <p class="hero__lead">Sites e experiências digitais desenhados para marcas que não podem passar despercebidas.</p>
+          <div class="hero__actions">
+            <a href="#contato" class="btn" data-magnetic><span class="btn__txt">Iniciar projeto</span> <span class="btn__arr" aria-hidden="true"><span>→</span></span></a>
+            <a href="#trabalhos" class="ulink ulink--arr">Ver trabalhos <span class="ulink__arr" aria-hidden="true"><span>↓</span></span></a>
+          </div>
         </div>
       </div>
-      <div class="about__content">
-        <p class="section__eyebrow">Sobre mim</p>
-        <h2 class="section__title">Ajudo negócios a terem presença online sem dor de cabeça.</h2>
-        <p class="about__text">
-          Sou Gonçalo, à frente da GTEXCREATIVE. Trabalho de perto com cada
-          cliente para entender o objetivo do site (seja vender mais,
-          passar credibilidade ou captar contatos) e entrego algo rápido,
-          bonito e fácil de manter, sem prazos eternos nem jargão técnico
-          desnecessário.
-        </p>
-        <ul class="about__list">
-          <li>Sites institucionais e landing pages</li>
-          <li>Design responsivo, mobile-first</li>
-          <li>Performance e SEO básico incluídos</li>
-        </ul>
+
+      <nav class="idx" aria-label="Índice de projetos">
+        <div class="idx__bar meta">
+          <p><b>Índice</b> · 08 projetos no ar</p>
+          <p class="ticker" aria-label="Resposta no mesmo dia útil. Design sob medida. Desenvolvimento próprio. Do briefing ao ar.">
+            <i class="sq sq--pulse" aria-hidden="true"></i>
+            <span class="ticker__win" aria-hidden="true">
+              <span class="ticker__item is-on">Resposta no mesmo dia útil</span>
+              <span class="ticker__item">Design sob medida</span>
+              <span class="ticker__item">Desenvolvimento próprio</span>
+              <span class="ticker__item">Do briefing ao ar</span>
+            </span>
+          </p>
+        </div>
+        <ol class="idx__list">
+          <li><a class="idx__item" href="#w01" style="--i:0">
+            <span class="idx__img"><img src="images/work/albea-t.webp" width="560" height="350" alt="" decoding="async" fetchpriority="high"></span>
+            <span class="idx__cap meta"><b>01</b>Albea</span>
+          </a></li>
+          <li><a class="idx__item" href="#w02" style="--i:1">
+            <span class="idx__img"><img src="images/work/sesmaria-t.webp" width="560" height="350" alt="" decoding="async" fetchpriority="high"></span>
+            <span class="idx__cap meta"><b>02</b>Sesmaria</span>
+          </a></li>
+          <li><a class="idx__item" href="#w03" style="--i:2">
+            <span class="idx__img"><img src="images/work/burger-t.webp" width="560" height="350" alt="" decoding="async" fetchpriority="high"></span>
+            <span class="idx__cap meta"><b>03</b>Burger House</span>
+          </a></li>
+          <li><a class="idx__item" href="#w04" style="--i:3">
+            <span class="idx__img"><img src="images/work/zanetti-t.webp" width="560" height="350" alt="" decoding="async" fetchpriority="high"></span>
+            <span class="idx__cap meta"><b>04</b>Zanetti</span>
+          </a></li>
+          <li><a class="idx__item" href="#w05" style="--i:4">
+            <span class="idx__img"><img src="images/work/petshop-t.webp" width="560" height="350" alt="" decoding="async"></span>
+            <span class="idx__cap meta"><b>05</b>Fátima Marques</span>
+          </a></li>
+          <li><a class="idx__item" href="#w06" style="--i:5">
+            <span class="idx__img"><img src="images/work/vivi-t.webp" width="560" height="350" alt="" decoding="async"></span>
+            <span class="idx__cap meta"><b>06</b>Vivi Chiapetta</span>
+          </a></li>
+          <li><a class="idx__item" href="#w07" style="--i:6">
+            <span class="idx__img"><img src="images/work/terra-t.webp" width="560" height="350" alt="" decoding="async"></span>
+            <span class="idx__cap meta"><b>07</b>Terra Quintal</span>
+          </a></li>
+          <li><a class="idx__item" href="#w08" style="--i:7">
+            <span class="idx__img"><img src="images/work/ogarett-t.webp" width="560" height="350" alt="" decoding="async"></span>
+            <span class="idx__cap meta"><b>08</b>Ogarett</span>
+          </a></li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- GTEX/01 · TRABALHOS -->
+  <section class="works" id="trabalhos" aria-labelledby="works-title">
+    <div class="wrap works__head">
+      <div class="bar" data-reveal>
+        <p class="meta bar__id"><i class="sq" aria-hidden="true"></i><span><span class="gx">GTEX/</span>01</span></p>
+        <p class="meta bar__t">Trabalhos</p>
+        <i class="bar__rule" aria-hidden="true"></i>
+        <p class="meta bar__r"><b>08</b> projetos no ar</p>
+      </div>
+      <h2 class="display works__title" id="works-title">
+        <span class="line"><span>Trabalho</span></span>
+        <span class="line"><span>selecionado<i class="dot">.</i></span></span>
+      </h2>
+      <p class="works__note" data-reveal>Do mais recente ao mais antigo. Cada projeto abre o site real. O tempo ao lado de "No ar" é medido agora, no seu navegador.</p>
+    </div>
+
+    <ol class="works__list">
+
+      <li class="work work--feature" id="w01">
+        <a class="work__link" href="https://albea-odontologia.vercel.app/" target="_blank" rel="noopener">
+          <div class="wrap work__grid">
+            <div class="work__slate meta">
+              <span class="work__num" aria-hidden="true"><span>01</span></span><span class="work__of" aria-hidden="true">/ 08</span>
+              <span class="work__live" data-live="https://albea-odontologia.vercel.app/"><i class="sq" aria-hidden="true"></i>No ar<span class="work__ms"></span></span>
+              <i class="work__rule" aria-hidden="true"></i>
+              <span class="work__tags">Clínica odontológica<i>/</i>São Paulo<i>/</i>2026</span>
+            </div>
+            <h3 class="work__name">Albea Odontologia</h3>
+            <div class="work__stage">
+              <div class="stage__move">
+                <div class="browser">
+                  <div class="browser__screen"><img src="images/work/albea-d.webp" width="1440" height="900" alt="Site da Albea Odontologia no computador" loading="lazy" decoding="async"></div>
+                </div>
+                <div class="phone"><div class="phone__screen"><img src="images/work/albea-m.webp" width="520" height="1097" alt="Site da Albea Odontologia no celular" loading="lazy" decoding="async"></div></div>
+              </div>
+            </div>
+            <div class="work__info">
+              <p class="work__desc">Clínica na Vila Madalena. Um dente em 3D conduz a visita, dos tratamentos ao agendamento.</p>
+              <dl class="spec">
+                <div><dt class="meta">Tipografia</dt><dd>Geist · Geist Mono</dd></div>
+                <div><dt class="meta">Cor</dt><dd class="spec__sw" aria-label="Paleta: #060C13, #0F2136, #1E5BC6, #E6EEF6"><span style="--c:#060C13" data-hex="#060C13"></span><span style="--c:#0F2136" data-hex="#0F2136"></span><span style="--c:#1E5BC6" data-hex="#1E5BC6"></span><span style="--c:#E6EEF6" data-hex="#E6EEF6"></span></dd></div>
+              </dl>
+              <span class="work__cta">Ver projeto <span class="work__arr" aria-hidden="true">↗</span><span class="sr">(abre em nova aba)</span></span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="work work--split" id="w02">
+        <a class="work__link" href="https://sesmaria.vercel.app/" target="_blank" rel="noopener">
+          <div class="wrap work__grid">
+            <div class="work__slate meta">
+              <span class="work__num" aria-hidden="true"><span>02</span></span><span class="work__of" aria-hidden="true">/ 08</span>
+              <span class="work__live" data-live="https://sesmaria.vercel.app/"><i class="sq" aria-hidden="true"></i>No ar<span class="work__ms"></span></span>
+              <i class="work__rule" aria-hidden="true"></i>
+              <span class="work__tags">Imobiliária de alto padrão<i>/</i>São Paulo<i>/</i>2026</span>
+            </div>
+            <h3 class="work__name">Sesmaria</h3>
+            <div class="work__stage">
+              <div class="stage__move">
+                <div class="browser">
+                  <div class="browser__screen"><img src="images/work/sesmaria-d.webp" width="1440" height="900" alt="Site da Sesmaria no computador" loading="lazy" decoding="async"></div>
+                </div>
+                <div class="phone"><div class="phone__screen"><img src="images/work/sesmaria-m.webp" width="520" height="1097" alt="Site da Sesmaria no celular" loading="lazy" decoding="async"></div></div>
+              </div>
+            </div>
+            <div class="work__info">
+              <p class="work__desc">Casas de alto padrão em São Paulo e no exterior, apresentadas uma a uma, com páginas para lançamentos e imóveis internacionais.</p>
+              <dl class="spec">
+                <div><dt class="meta">Tipografia</dt><dd>Cormorant Garamond · Hanken Grotesk</dd></div>
+                <div><dt class="meta">Cor</dt><dd class="spec__sw" aria-label="Paleta: #0E0F0D, #6C6A64, #B79C74, #EEEDE9"><span style="--c:#0E0F0D" data-hex="#0E0F0D"></span><span style="--c:#6C6A64" data-hex="#6C6A64"></span><span style="--c:#B79C74" data-hex="#B79C74"></span><span style="--c:#EEEDE9" data-hex="#EEEDE9"></span></dd></div>
+              </dl>
+              <span class="work__cta">Ver projeto <span class="work__arr" aria-hidden="true">↗</span><span class="sr">(abre em nova aba)</span></span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="work work--portrait" id="w03">
+        <a class="work__link" href="https://burger-house-snowy-alpha.vercel.app/" target="_blank" rel="noopener">
+          <div class="wrap work__grid">
+            <div class="work__slate meta">
+              <span class="work__num" aria-hidden="true"><span>03</span></span><span class="work__of" aria-hidden="true">/ 08</span>
+              <span class="work__live" data-live="https://burger-house-snowy-alpha.vercel.app/"><i class="sq" aria-hidden="true"></i>No ar<span class="work__ms"></span></span>
+              <i class="work__rule" aria-hidden="true"></i>
+              <span class="work__tags">Hamburgueria<i>/</i>São Paulo<i>/</i>2026</span>
+            </div>
+            <h3 class="work__name">Burger House</h3>
+            <div class="work__stage">
+              <div class="stage__move">
+                <div class="browser">
+                  <div class="browser__screen"><img src="images/work/burger-d.webp" width="1440" height="900" alt="Site da Burger House no computador" loading="lazy" decoding="async"></div>
+                </div>
+                <div class="phone"><div class="phone__screen"><img src="images/work/burger-m.webp" width="520" height="1097" alt="Site da Burger House no celular" loading="lazy" decoding="async"></div></div>
+              </div>
+            </div>
+            <div class="work__info">
+              <p class="work__desc">O cardápio como vitrine: cada lanche em destaque e um caminho curto até o pedido para delivery.</p>
+              <dl class="spec">
+                <div><dt class="meta">Tipografia</dt><dd>Barlow Condensed · Inter</dd></div>
+                <div><dt class="meta">Cor</dt><dd class="spec__sw" aria-label="Paleta: #111111, #F12F16, #FFB000, #F7F7F7"><span style="--c:#111111" data-hex="#111111"></span><span style="--c:#F12F16" data-hex="#F12F16"></span><span style="--c:#FFB000" data-hex="#FFB000"></span><span style="--c:#F7F7F7" data-hex="#F7F7F7"></span></dd></div>
+              </dl>
+              <span class="work__cta">Ver projeto <span class="work__arr" aria-hidden="true">↗</span><span class="sr">(abre em nova aba)</span></span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="work work--split work--flip" id="w04">
+        <a class="work__link" href="https://exemplo-1-three.vercel.app/" target="_blank" rel="noopener">
+          <div class="wrap work__grid">
+            <div class="work__slate meta">
+              <span class="work__num" aria-hidden="true"><span>04</span></span><span class="work__of" aria-hidden="true">/ 08</span>
+              <span class="work__live" data-live="https://exemplo-1-three.vercel.app/"><i class="sq" aria-hidden="true"></i>No ar<span class="work__ms"></span></span>
+              <i class="work__rule" aria-hidden="true"></i>
+              <span class="work__tags">Oficina mecânica<i>/</i>São Paulo<i>/</i>2026</span>
+            </div>
+            <h3 class="work__name">Oficina Zanetti</h3>
+            <div class="work__stage">
+              <div class="stage__move">
+                <div class="browser">
+                  <div class="browser__screen"><img src="images/work/zanetti-d.webp" width="1440" height="900" alt="Site da Oficina Zanetti no computador" loading="lazy" decoding="async"></div>
+                </div>
+                <div class="phone"><div class="phone__screen"><img src="images/work/zanetti-m.webp" width="520" height="1097" alt="Site da Oficina Zanetti no celular" loading="lazy" decoding="async"></div></div>
+              </div>
+            </div>
+            <div class="work__info">
+              <p class="work__desc">Mecânica e injeção eletrônica. Diagnóstico por scanner e orçamento fechado no WhatsApp antes do reparo.</p>
+              <dl class="spec">
+                <div><dt class="meta">Tipografia</dt><dd>Anton · IBM Plex Sans · IBM Plex Mono</dd></div>
+                <div><dt class="meta">Cor</dt><dd class="spec__sw" aria-label="Paleta: #14181D, #2C343E, #FFC400, #E7E9E8"><span style="--c:#14181D" data-hex="#14181D"></span><span style="--c:#2C343E" data-hex="#2C343E"></span><span style="--c:#FFC400" data-hex="#FFC400"></span><span style="--c:#E7E9E8" data-hex="#E7E9E8"></span></dd></div>
+              </dl>
+              <span class="work__cta">Ver projeto <span class="work__arr" aria-hidden="true">↗</span><span class="sr">(abre em nova aba)</span></span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="work work--feature work--flip" id="w05">
+        <a class="work__link" href="https://pet-shop-63kg.vercel.app/" target="_blank" rel="noopener">
+          <div class="wrap work__grid">
+            <div class="work__slate meta">
+              <span class="work__num" aria-hidden="true"><span>05</span></span><span class="work__of" aria-hidden="true">/ 08</span>
+              <span class="work__live" data-live="https://pet-shop-63kg.vercel.app/"><i class="sq" aria-hidden="true"></i>No ar<span class="work__ms"></span></span>
+              <i class="work__rule" aria-hidden="true"></i>
+              <span class="work__tags">Banho e tosquia pet<i>/</i>Lisboa<i>/</i>2026</span>
+            </div>
+            <h3 class="work__name">Fátima Marques</h3>
+            <div class="work__stage">
+              <div class="stage__move">
+                <div class="browser">
+                  <div class="browser__screen"><img src="images/work/petshop-d.webp" width="1440" height="900" alt="Site da Fátima Marques no computador" loading="lazy" decoding="async"></div>
+                </div>
+                <div class="phone"><div class="phone__screen"><img src="images/work/petshop-m.webp" width="520" height="1097" alt="Site da Fátima Marques no celular" loading="lazy" decoding="async"></div></div>
+              </div>
+            </div>
+            <div class="work__info">
+              <p class="work__desc">Salão de banho e tosquia no Parque das Nações, em Lisboa. Acolhedor como o próprio espaço.</p>
+              <dl class="spec">
+                <div><dt class="meta">Tipografia</dt><dd>Nunito</dd></div>
+                <div><dt class="meta">Cor</dt><dd class="spec__sw" aria-label="Paleta: #1F2937, #7C2D12, #F97316, #FFF7ED"><span style="--c:#1F2937" data-hex="#1F2937"></span><span style="--c:#7C2D12" data-hex="#7C2D12"></span><span style="--c:#F97316" data-hex="#F97316"></span><span style="--c:#FFF7ED" data-hex="#FFF7ED"></span></dd></div>
+              </dl>
+              <span class="work__cta">Ver projeto <span class="work__arr" aria-hidden="true">↗</span><span class="sr">(abre em nova aba)</span></span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="work work--portrait work--flip" id="w06">
+        <a class="work__link" href="https://vivi-chiapetta.vercel.app/" target="_blank" rel="noopener">
+          <div class="wrap work__grid">
+            <div class="work__slate meta">
+              <span class="work__num" aria-hidden="true"><span>06</span></span><span class="work__of" aria-hidden="true">/ 08</span>
+              <span class="work__live" data-live="https://vivi-chiapetta.vercel.app/"><i class="sq" aria-hidden="true"></i>No ar<span class="work__ms"></span></span>
+              <i class="work__rule" aria-hidden="true"></i>
+              <span class="work__tags">Clínica de sobrancelhas<i>/</i>São Paulo<i>/</i>2026</span>
+            </div>
+            <h3 class="work__name">Espaço Vivi Chiapetta</h3>
+            <div class="work__stage">
+              <div class="stage__move">
+                <div class="browser">
+                  <div class="browser__screen"><img src="images/work/vivi-d.webp" width="1440" height="900" alt="Site do Espaço Vivi Chiapetta no computador" loading="lazy" decoding="async"></div>
+                </div>
+                <div class="phone"><div class="phone__screen"><img src="images/work/vivi-m.webp" width="520" height="1097" alt="Site do Espaço Vivi Chiapetta no celular" loading="lazy" decoding="async"></div></div>
+              </div>
+            </div>
+            <div class="work__info">
+              <p class="work__desc">Design de sobrancelhas, micropigmentação e brow lamination na Vila Suzana, com agendamento direto.</p>
+              <dl class="spec">
+                <div><dt class="meta">Tipografia</dt><dd>Playfair Display · Inter</dd></div>
+                <div><dt class="meta">Cor</dt><dd class="spec__sw" aria-label="Paleta: #2C2A29, #B68D5D, #D29B8C, #F4E8E1"><span style="--c:#2C2A29" data-hex="#2C2A29"></span><span style="--c:#B68D5D" data-hex="#B68D5D"></span><span style="--c:#D29B8C" data-hex="#D29B8C"></span><span style="--c:#F4E8E1" data-hex="#F4E8E1"></span></dd></div>
+              </dl>
+              <span class="work__cta">Ver projeto <span class="work__arr" aria-hidden="true">↗</span><span class="sr">(abre em nova aba)</span></span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="work work--split" id="w07">
+        <a class="work__link" href="https://terra-quintal.vercel.app/" target="_blank" rel="noopener">
+          <div class="wrap work__grid">
+            <div class="work__slate meta">
+              <span class="work__num" aria-hidden="true"><span>07</span></span><span class="work__of" aria-hidden="true">/ 08</span>
+              <span class="work__live" data-live="https://terra-quintal.vercel.app/"><i class="sq" aria-hidden="true"></i>No ar<span class="work__ms"></span></span>
+              <i class="work__rule" aria-hidden="true"></i>
+              <span class="work__tags">Restaurante e eventos<i>/</i>São Paulo<i>/</i>2026</span>
+            </div>
+            <h3 class="work__name">Terra Quintal</h3>
+            <div class="work__stage">
+              <div class="stage__move">
+                <div class="browser">
+                  <div class="browser__screen"><img src="images/work/terra-d.webp" width="1440" height="900" alt="Site do Terra Quintal no computador" loading="lazy" decoding="async"></div>
+                </div>
+                <div class="phone"><div class="phone__screen"><img src="images/work/terra-m.webp" width="520" height="1097" alt="Site do Terra Quintal no celular" loading="lazy" decoding="async"></div></div>
+              </div>
+            </div>
+            <div class="work__info">
+              <p class="work__desc">Restaurante arborizado e espaço de eventos no Brooklin: menu executivo, buffet e recreação infantil.</p>
+              <dl class="spec">
+                <div><dt class="meta">Tipografia</dt><dd>Merriweather · Inter</dd></div>
+                <div><dt class="meta">Cor</dt><dd class="spec__sw" aria-label="Paleta: #2C2C2C, #4A5D4E, #8B5A2B, #D4A373"><span style="--c:#2C2C2C" data-hex="#2C2C2C"></span><span style="--c:#4A5D4E" data-hex="#4A5D4E"></span><span style="--c:#8B5A2B" data-hex="#8B5A2B"></span><span style="--c:#D4A373" data-hex="#D4A373"></span></dd></div>
+              </dl>
+              <span class="work__cta">Ver projeto <span class="work__arr" aria-hidden="true">↗</span><span class="sr">(abre em nova aba)</span></span>
+            </div>
+          </div>
+        </a>
+      </li>
+      <li class="work work--split work--flip" id="w08">
+        <a class="work__link" href="https://restaurante-ogarett-rabe.vercel.app/" target="_blank" rel="noopener">
+          <div class="wrap work__grid">
+            <div class="work__slate meta">
+              <span class="work__num" aria-hidden="true"><span>08</span></span><span class="work__of" aria-hidden="true">/ 08</span>
+              <span class="work__live" data-live="https://restaurante-ogarett-rabe.vercel.app/"><i class="sq" aria-hidden="true"></i>No ar<span class="work__ms"></span></span>
+              <i class="work__rule" aria-hidden="true"></i>
+              <span class="work__tags">Culinária árabe<i>/</i>São Paulo<i>/</i>2026</span>
+            </div>
+            <h3 class="work__name">Restaurante Ogarett</h3>
+            <div class="work__stage">
+              <div class="stage__move">
+                <div class="browser">
+                  <div class="browser__screen"><img src="images/work/ogarett-d.webp" width="1440" height="900" alt="Site do Restaurante Ogarett no computador" loading="lazy" decoding="async"></div>
+                </div>
+                <div class="phone"><div class="phone__screen"><img src="images/work/ogarett-m.webp" width="520" height="1097" alt="Site do Restaurante Ogarett no celular" loading="lazy" decoding="async"></div></div>
+              </div>
+            </div>
+            <div class="work__info">
+              <p class="work__desc">Shawarma e sabores do Oriente no Brás, com pedidos por WhatsApp e pelos apps de delivery.</p>
+              <dl class="spec">
+                <div><dt class="meta">Tipografia</dt><dd>Playfair Display · Inter</dd></div>
+                <div><dt class="meta">Cor</dt><dd class="spec__sw" aria-label="Paleta: #111111, #8B0000, #D4AF37, #FAFAFA"><span style="--c:#111111" data-hex="#111111"></span><span style="--c:#8B0000" data-hex="#8B0000"></span><span style="--c:#D4AF37" data-hex="#D4AF37"></span><span style="--c:#FAFAFA" data-hex="#FAFAFA"></span></dd></div>
+              </dl>
+              <span class="work__cta">Ver projeto <span class="work__arr" aria-hidden="true">↗</span><span class="sr">(abre em nova aba)</span></span>
+            </div>
+          </div>
+        </a>
+      </li>
+
+    </ol>
+  </section>
+
+  <!-- GTEX/02 · ESTÚDIO -->
+  <section class="about" id="sobre" aria-labelledby="about-title">
+    <div class="wrap">
+      <div class="bar" data-reveal>
+        <p class="meta bar__id"><i class="sq" aria-hidden="true"></i><span><span class="gx">GTEX/</span>02</span></p>
+        <p class="meta bar__t">Estúdio</p>
+        <i class="bar__rule" aria-hidden="true"></i>
+        <p class="meta bar__r">Gonçalo, à frente do estúdio</p>
+      </div>
+      <h2 class="statement" id="about-title">
+        <span class="line"><span>Um site não é</span></span>
+        <span class="line statement__shift"><span>um folheto<i class="dot">.</i></span></span>
+      </h2>
+      <p class="statement statement--b">
+        <span class="line"><span>É o <em>primeiro</em></span></span>
+        <span class="line"><span><em>atendimento</em></span></span>
+        <span class="line"><span>da sua empresa.</span></span>
+      </p>
+      <div class="about__grid">
+        <div class="about__text">
+          <p data-reveal>Sou Gonçalo, à frente da GTEXCREATIVE, um estúdio independente. Trabalho de perto com cada cliente para entender o objetivo do site (seja vender mais, passar credibilidade ou captar contatos) e entrego algo rápido, bonito e fácil de manter.</p>
+          <p data-reveal>Sem prazos eternos e sem jargão técnico desnecessário. Você fala direto comigo, do briefing ao site no ar.</p>
+        </div>
+        <dl class="figs">
+          <div data-reveal><dt class="meta">Projetos no ar</dt><dd>08</dd></div>
+          <div data-reveal><dt class="meta">Países · Brasil e Portugal</dt><dd>02</dd></div>
+          <div data-reveal><dt class="meta">Pessoa, do briefing ao ar</dt><dd>01</dd></div>
+        </dl>
       </div>
     </div>
   </section>
 
-  <section class="contact" id="contato">
-    <div class="container contact__inner">
-      <p class="section__eyebrow">Contato</p>
-      <h2 class="section__title">Vamos conversar sobre o seu projeto?</h2>
-      <p class="contact__text">
-        Me chama num desses canais com uma ideia do que você precisa,
-        respondo rápido, geralmente no mesmo dia útil.
-      </p>
-      <div class="contact__links">
-        <a href="mailto:gtexcreative@gmail.com" class="contact__link">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
-          gtexcreative@gmail.com
-        </a>
-        <a href="https://wa.me/5511947822999?text=Ol%C3%A1%2C%20vi%20o%20seu%20portf%C3%B3lio%20e%20quero%20falar%20sobre%20um%20projeto." class="contact__link" target="_blank" rel="noopener">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          WhatsApp
-        </a>
-        <a href="https://instagram.com/gtexcreative" class="contact__link" target="_blank" rel="noopener">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-          Instagram @gtexcreative
-        </a>
+  <!-- GTEX/03 · SERVIÇOS -->
+  <section class="services" id="servicos" aria-labelledby="svc-title">
+    <div class="wrap">
+      <div class="bar" data-reveal>
+        <p class="meta bar__id"><i class="sq" aria-hidden="true"></i><span><span class="gx">GTEX/</span>03</span></p>
+        <p class="meta bar__t">Serviços</p>
+        <i class="bar__rule" aria-hidden="true"></i>
+        <p class="meta bar__r">04 frentes</p>
       </div>
+      <h2 class="sr" id="svc-title">Serviços</h2>
+      <ul class="svc" id="svc">
+        <li class="svc__item" data-reveal>
+          <span class="svc__n">01</span><span class="svc__name">Sites institucionais</span><span class="svc__desc">A presença completa da marca, página a página.</span><span class="svc__arr" aria-hidden="true">→</span>
+        </li>
+        <li class="svc__item" data-reveal>
+          <span class="svc__n">02</span><span class="svc__name">Landing pages</span><span class="svc__desc">Uma página, um objetivo, uma ação clara.</span><span class="svc__arr" aria-hidden="true">→</span>
+        </li>
+        <li class="svc__item" data-reveal>
+          <span class="svc__n">03</span><span class="svc__name">Design responsivo</span><span class="svc__desc">Pensado primeiro para o celular.</span><span class="svc__arr" aria-hidden="true">→</span>
+        </li>
+        <li class="svc__item" data-reveal>
+          <span class="svc__n">04</span><span class="svc__name">Performance e SEO</span><span class="svc__desc">Rápido de abrir e preparado para ser encontrado.</span><span class="svc__arr" aria-hidden="true">→</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- GTEX/04 · PROCESSO -->
+  <section class="process" id="processo" aria-labelledby="process-title">
+    <div class="wrap">
+      <div class="bar bar--ink" data-reveal>
+        <p class="meta bar__id"><i class="sq" aria-hidden="true"></i><span><span class="gx">GTEX/</span>04</span></p>
+        <p class="meta bar__t">Processo</p>
+        <i class="bar__rule" aria-hidden="true"></i>
+        <p class="meta bar__r">04 etapas</p>
+      </div>
+      <div class="process__grid">
+        <div class="process__head">
+          <h2 class="display process__title" id="process-title">
+            <span class="line"><span>Do briefing</span></span>
+            <span class="line"><span>ao ar<i class="dot">.</i></span></span>
+          </h2>
+          <div class="process__meter" aria-hidden="true"><i id="pmeter"></i><span class="meta" id="pcount">01 / 04</span></div>
+        </div>
+        <ol class="steps" id="steps">
+          <li class="step is-on"><span class="step__n">01</span><div><h3>Descobrir</h3><p>Entender o negócio, o público e o que o site precisa resolver.</p></div></li>
+          <li class="step"><span class="step__n">02</span><div><h3>Desenhar</h3><p>Criar a linguagem visual e a experiência de cada página.</p></div></li>
+          <li class="step"><span class="step__n">03</span><div><h3>Construir</h3><p>Transformar o desenho num site rápido e responsivo.</p></div></li>
+          <li class="step"><span class="step__n">04</span><div><h3>Publicar</h3><p>Revisar, otimizar e colocar no ar.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- GTEX/05 · PRINCÍPIOS -->
+  <section class="manifesto" id="principios" aria-labelledby="mani-title">
+    <div class="wrap">
+      <div class="bar" data-reveal>
+        <p class="meta bar__id"><i class="sq" aria-hidden="true"></i><span><span class="gx">GTEX/</span>05</span></p>
+        <p class="meta bar__t">Princípios</p>
+        <i class="bar__rule" aria-hidden="true"></i>
+        <p class="meta bar__r">03</p>
+      </div>
+      <h2 class="display mani__title" id="mani-title">
+        <span class="line"><span>Não é só</span></span>
+        <span class="line"><span>um site<i class="dot">.</i></span></span>
+      </h2>
+      <ol class="mani__list">
+        <li data-reveal><span class="mani__n">01</span><span class="mani__t">Pensado para o negócio.</span></li>
+        <li data-reveal><span class="mani__n">02</span><span class="mani__t">Desenhado para a experiência.</span></li>
+        <li data-reveal><span class="mani__n">03</span><span class="mani__t">Construído para funcionar.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- GTEX/06 · CONTATO -->
+  <section class="cta" id="contato" aria-labelledby="cta-title">
+    <div class="wrap">
+      <div class="bar" data-reveal>
+        <p class="meta bar__id"><i class="sq" aria-hidden="true"></i><span><span class="gx">GTEX/</span>06</span></p>
+        <p class="meta bar__t">Contato</p>
+        <i class="bar__rule" aria-hidden="true"></i>
+        <p class="meta bar__r"><i class="sq sq--pulse" aria-hidden="true"></i>Resposta no mesmo dia útil</p>
+      </div>
+      <p class="cta__kicker" data-reveal>Tem uma ideia?</p>
+      <h2 class="display cta__title" id="cta-title">
+        <span class="line"><span>Vamos colocar</span></span>
+        <span class="line"><span>no ar<i class="dot">.</i></span></span>
+      </h2>
+      <p class="cta__text" data-reveal>Me chama com uma ideia do que você precisa. Respondo rápido, geralmente no mesmo dia útil.</p>
+      <form class="brief" id="brief" data-reveal aria-label="Monte o seu pedido">
+        <p class="brief__intro meta"><b>Pedido rápido</b> · três escolhas e a mensagem sai pronta</p>
+        <div class="brief__grid">
+          <fieldset class="brief__q">
+            <legend class="meta"><b>01</b>O seu negócio</legend>
+            <div class="brief__opts">
+            <label><input type="radio" name="negocio" value="Clínica / consultório" data-msg="Tenho uma clínica ou consultório."><span>Clínica / consultório</span></label>
+            <label><input type="radio" name="negocio" value="Restaurante" data-msg="Tenho um restaurante."><span>Restaurante</span></label>
+            <label><input type="radio" name="negocio" value="Imobiliária" data-msg="Tenho uma imobiliária."><span>Imobiliária</span></label>
+            <label><input type="radio" name="negocio" value="Serviço local" data-msg="Tenho um serviço local."><span>Serviço local</span></label>
+            <label><input type="radio" name="negocio" value="Loja / marca" data-msg="Tenho uma loja ou marca."><span>Loja / marca</span></label>
+            <label><input type="radio" name="negocio" value="Outro" data-msg="Tenho outro tipo de negócio."><span>Outro</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="brief__q">
+            <legend class="meta"><b>02</b>O que precisa</legend>
+            <div class="brief__opts">
+            <label><input type="radio" name="servico" value="Site institucional" data-msg="Preciso de um site institucional."><span>Site institucional</span></label>
+            <label><input type="radio" name="servico" value="Landing page" data-msg="Preciso de uma landing page."><span>Landing page</span></label>
+            <label><input type="radio" name="servico" value="Refazer o site atual" data-msg="Quero refazer o site atual."><span>Refazer o site atual</span></label>
+            <label><input type="radio" name="servico" value="Ainda não sei" data-msg="Ainda não sei bem o que preciso."><span>Ainda não sei</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="brief__q">
+            <legend class="meta"><b>03</b>Prazo</legend>
+            <div class="brief__opts">
+            <label><input type="radio" name="prazo" value="Este mês" data-msg="Prazo: este mês."><span>Este mês</span></label>
+            <label><input type="radio" name="prazo" value="Próximos 3 meses" data-msg="Prazo: nos próximos 3 meses."><span>Próximos 3 meses</span></label>
+            <label><input type="radio" name="prazo" value="Sem pressa" data-msg="Sem pressa de prazo."><span>Sem pressa</span></label>
+            </div>
+          </fieldset>
+        </div>
+      </form>
+      <a class="go" id="go" href="https://wa.me/5511947822999?text=Ol%C3%A1%2C%20vi%20o%20seu%20portf%C3%B3lio%20e%20quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener" data-reveal>
+        <span class="go__txt">Iniciar projeto</span>
+        <span class="go__meta meta" id="goMeta" aria-live="polite">WhatsApp · (11) 94782-2999</span>
+        <span class="go__arr" aria-hidden="true">↗</span>
+        <span class="sr">(abre o WhatsApp em nova aba)</span>
+      </a>
+      <ul class="cta__links">
+        <li data-reveal><span class="meta">E-mail</span><a class="ulink" href="mailto:gtexcreative@gmail.com">gtexcreative@gmail.com</a></li>
+        <li data-reveal><span class="meta">WhatsApp</span><a class="ulink" href="https://wa.me/5511947822999?text=Ol%C3%A1%2C%20vi%20o%20seu%20portf%C3%B3lio%20e%20quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener">(11) 94782-2999</a></li>
+        <li data-reveal><span class="meta">Instagram</span><a class="ulink" href="https://instagram.com/gtexcreative" target="_blank" rel="noopener">@gtexcreative</a></li>
+      </ul>
     </div>
   </section>
 
 </main>
 
-<footer class="footer">
-  <div class="container footer__inner">
-    <p>&copy; <span id="year"></span> GTEXCREATIVE. Todos os direitos reservados.</p>
-    <a href="#top" class="footer__back">Voltar ao topo ↑</a>
+<footer class="foot">
+  <div class="wrap foot__grid">
+    <div class="foot__brand">
+      <a href="#top" class="foot__logo">GTEXCREATIVE<i>.</i></a>
+      <p>Estúdio independente de sites e apps.<br>São Paulo · Lisboa</p>
+    </div>
+    <nav class="foot__nav" aria-label="Rodapé">
+      <a href="#trabalhos">Trabalhos</a><a href="#sobre">Estúdio</a><a href="#processo">Processo</a><a href="#contato">Contato</a>
+    </nav>
+    <div class="foot__end">
+      <p class="meta">&copy; <span id="year">2026</span> GTEXCREATIVE</p>
+      <a href="#top" class="foot__top">Voltar ao topo ↑</a>
+    </div>
   </div>
 </footer>
 
-<a href="https://wa.me/5511947822999?text=Ol%C3%A1%2C%20vi%20o%20seu%20portf%C3%B3lio%20e%20quero%20falar%20sobre%20um%20projeto." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+<a href="https://wa.me/5511947822999?text=Ol%C3%A1%2C%20vi%20o%20seu%20portf%C3%B3lio%20e%20quero%20falar%20sobre%20um%20projeto." class="wa" id="wa" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
 </a>
 
 <script src="script.js"></script>
