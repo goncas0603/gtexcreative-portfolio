@@ -165,14 +165,12 @@ p, dd { text-wrap: pretty; }
 .nav__logo i { font-style: normal; color: var(--acc); }
 .nav__links { display: flex; gap: clamp(18px, 2.4vw, 38px); }
 .nav__link { position: relative; display: block; overflow: hidden; font-family: var(--m); font-size: .74rem; letter-spacing: .08em; text-transform: uppercase; color: var(--mute); padding: 6px 0; transition: color .4s; }
-/* o texto rola e dá lugar a uma cópia igual */
-.nav__link > span { display: block; text-shadow: 0 2em 0 currentColor; transition: transform .5s var(--e); }
+.nav__link > span { display: block; }
 .nav__link::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--acc); transform: scaleX(0); transform-origin: left; transition: transform .45s var(--e); }
 .nav__link.is-on { color: var(--fg); }
 .nav__link.is-on::after { transform: none; }
 @media (hover: hover) and (pointer: fine) {
   .nav__link:hover { color: var(--fg); }
-  .nav__link:hover > span { transform: translateY(-2em); }
   .nav__link:hover::after { transform: none; }
   .nav.on-light .nav__link:hover { color: var(--ink); }
 }
