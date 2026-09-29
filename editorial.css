@@ -77,6 +77,11 @@ body, body *, body *::before, body *::after { letter-spacing: 0; }
 .idx { padding-bottom: 30px; }
 .idx__bar { color: var(--mute); border-color: var(--ink); padding-block: 14px 20px; }
 .idx__bar b { color: var(--ink); }
+.idx__bar p { line-height: 1.5; }
+.ticker__win { height: 1.6em; }
+.ticker__item { line-height: 1.5; transform: none; transition: opacity .18s ease; }
+.ticker__item.is-on { transition-delay: .18s; }
+.ticker__item.is-out { transform: none; }
 .idx__list { gap: 16px; }
 .idx__item { padding: 0; }
 .idx__img { transition: transform .35s ease; }
