@@ -189,7 +189,7 @@ body, body *, body *::before, body *::after { letter-spacing: 0; }
 .foot__logo .brand__type { width: 146px; }
 .foot__grid { color: var(--mute); }
 .foot__signature { margin-top: 48px; display: flex; justify-content: space-between; gap: 20px; font: 500 .75rem/1.5 var(--m); color: #515a63; }
-.wa { background: var(--blue); color: #fff; }
+.wa { width: 56px; height: 56px; background: #25d366; color: #fff; box-shadow: 0 12px 28px -10px rgba(13, 90, 48, .65); }
 .rail { left: 16px; }
 .rail__ticks a { height: 24px; }
 .rail__label { background: var(--paper); padding: 12px 5px; color: #454d57; }
