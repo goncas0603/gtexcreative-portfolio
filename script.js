@@ -38,15 +38,34 @@
   /* ---------- Menu do celular ---------- */
   const burger = $('#burger');
   const menu = $('#menu');
+  const menuLinks = $$('a', menu);
+  let menuReturnFocus = null;
   const setMenu = open => {
     document.body.classList.toggle('menu-open', open);
     burger.setAttribute('aria-expanded', String(open));
     burger.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
     menu.setAttribute('aria-hidden', String(!open));
+    if (open) {
+      menuReturnFocus = document.activeElement;
+      requestAnimationFrame(() => menuLinks[0]?.focus());
+    } else if (menuReturnFocus && document.activeElement !== burger) {
+      menuReturnFocus.focus();
+      menuReturnFocus = null;
+    }
   };
   burger.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
-  $$('a', menu).forEach(a => a.addEventListener('click', () => setMenu(false)));
-  addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+  menuLinks.forEach(a => a.addEventListener('click', () => setMenu(false)));
+  addEventListener('keydown', e => {
+    if (!document.body.classList.contains('menu-open')) return;
+    if (e.key === 'Escape') setMenu(false);
+    if (e.key === 'Tab') {
+      const focusable = [burger, ...menuLinks];
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
 
   /* ---------- Revelar ao entrar no ecrã ---------- */
   if (motion) {
