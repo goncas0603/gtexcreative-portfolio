@@ -79,8 +79,9 @@ body, body *, body *::before, body *::after { letter-spacing: 0; }
 .idx__bar b { color: var(--ink); }
 .idx__list { gap: 16px; }
 .idx__item { padding: 0; }
-.idx__img { filter: grayscale(1); transition: filter .35s ease, transform .35s ease; }
-.idx__item:hover .idx__img { filter: none; transform: translateY(-3px); }
+.idx__img { transition: transform .35s ease; }
+.idx__img img { filter: none; }
+.idx__item:hover .idx__img { transform: translateY(-3px); }
 .idx__cap { font-size: .72rem; gap: 4px; color: #525963; }
 .idx__cap b { color: var(--blue); margin-right: 3px; }
 .ticker .sq { background: var(--blue); }
