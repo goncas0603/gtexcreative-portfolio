@@ -104,13 +104,13 @@
   const goLink = $('#go');
   const goMeta = $('#goMeta');
   if (brief && goLink) {
-    const wa = 'https://wa.me/351927874772?text=';
+    const wa = 'https://wa.me/5511927211114?text=';
     const base = 'Olá, vi o seu portfólio e quero falar sobre um projeto.';
     const update = () => {
       const picked = ['negocio', 'servico', 'prazo'].map(n => brief.querySelector(`input[name="${n}"]:checked`)).filter(Boolean);
       const msg = picked.length ? ['Olá, vi o seu portfólio.', ...picked.map(i => i.dataset.msg)].join(' ') : base;
       goLink.href = wa + encodeURIComponent(msg);
-      goMeta.textContent = picked.length ? picked.map(i => i.value).join(' · ') : 'WhatsApp · +351 927 874 772';
+      goMeta.textContent = picked.length ? picked.map(i => i.value).join(' · ') : 'WhatsApp · +55 11 92721-1114';
       goLink.classList.toggle('is-ready', picked.length === 3);
     };
     brief.addEventListener('change', update);
